@@ -229,6 +229,48 @@ namespace ElementaryTweaks {
 
             widget_grid.add (font_button);
         }
+        
+        /**
+         * Constructs a tweak widget that has a file widget that tweaks a string (containing a file name) value
+         */
+        public TweakWidget.with_file_button (string name, string tooltip, string? warning_text, GetValue<string> get_value, SetValue<string> set_value, ResetValue reset_value)
+        {
+            this (name, tooltip, warning_text, reset_value);
+
+            // file button that will allow selection of file
+            var file_chooser = new Gtk.FileChooserButton (_("Select the new background"), Gtk.FileChooserAction.OPEN);
+            file_chooser.halign = Gtk.Align.FILL;
+            file_chooser.hexpand = true;
+            file_chooser.width_request = 150;
+            
+            Gtk.FileFilter filter = new Gtk.FileFilter ();
+            filter.set_filter_name (_("Images"));
+            filter.add_mime_type ("image/png");
+            filter.add_mime_type ("image/jpeg");
+            filter.add_mime_type ("image/svg+xml");
+            file_chooser.add_filter (filter);
+            
+            if (get_value() != "") {
+                file_chooser.set_filename (get_value ());
+            }
+            
+            // when file is changed, set the value to active entry
+            file_chooser.file_set.connect_after (() => {
+                    string file = file_chooser.get_uri ();
+                    if (file.has_prefix ("file://")) {
+                        file = file.splice (0, 7); // remove "file://" from the string
+                    }
+                    set_value (file);
+                });
+            
+            // when the default button is pressed, reset the font button to the new value
+            default_button.clicked.connect_after (() => {
+                    set_value ("");
+                    file_chooser.unselect_all ();
+                });
+
+            widget_grid.add (file_chooser);
+        }
 
         /**
          * Constructs a tweak widget that has a spin button that tweaks as int value
