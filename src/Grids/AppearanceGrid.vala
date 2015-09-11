@@ -92,7 +92,7 @@ namespace ElementaryTweaks {
             
             //Workspace switcher background
             var workspace_background = new TweakWidget.with_file_button (
-                        _("Multitasking view background"), // name
+                        _("Multitasking View Background"), // name
                         _("Custom background for the multitasking view"), // tooltip
                         _("This will take place after gala is restarted"), // warning
                         (() => { return AppearanceSettings.get_default ().workspace_switcher_background; }), // get
