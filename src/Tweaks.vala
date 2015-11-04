@@ -23,7 +23,7 @@ namespace ElementaryTweaks {
      * A Switchboard plugin to tweak the Elementary OS system.
      */
     public class TweaksPlug : Switchboard.Plug {
-        private Granite.Widgets.ThinPaned main_view;
+        private Gtk.Paned main_view;
         private Granite.Widgets.SourceList sidebar;
         private Gtk.Notebook tweak_content;
         private Gee.HashMap<string, Granite.Widgets.SourceList.ExpandableItem> categories;
@@ -43,7 +43,7 @@ namespace ElementaryTweaks {
                     code_name: Build.PROJECT_NAME,
                     display_name: _("Tweaks"),
                     description: _("Tweak elementary OS settings"),
-                    icon: "applications-development");
+                    icon: "preferences-desktop-tweaks");
 
             // make sure that UI is created.
             // TODO: there might be a better way of doing this.
@@ -228,7 +228,7 @@ namespace ElementaryTweaks {
                 var content_area = get_content_area ();
 
                 // create our main_view; holds side navigation and content area
-                main_view = new Granite.Widgets.ThinPaned ();
+                main_view = new Gtk.Paned (Gtk.Orientation.HORIZONTAL);
 
                 // pack the side bar on the left and content on the right
                 main_view.pack1 (navigation_sidebar, false, false);

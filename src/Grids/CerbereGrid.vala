@@ -70,30 +70,22 @@ namespace ElementaryTweaks {
             tbar.insert (reset_button, -1);
 
             add_button.clicked.connect (() => {
-                    var add_popover = new Granite.Widgets.PopOver();
+                    var add_popover = new Gtk.Popover(add_button);
                     var entry = new Gtk.Entry ();
-                    var apply = new Gtk.ToolButton.from_stock (Gtk.Stock.ADD);
+                    var add_image = new Gtk.Image.from_icon_name ("list-add-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
+                    var apply = new Gtk.ToolButton (add_image, _("Add New"));
                     var box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
 
                     apply.clicked.connect (() => {
-                        list_add( entry.get_text () );
-                        add_popover.destroy ();
-                        });
-
-                    entry.activate.connect (() => {
-                        list_add( entry.get_text () );
-                        add_popover.destroy ();
+                            list_add (entry.get_text ());
+                            add_popover.destroy ();
                         });
 
                     box.pack_start (entry);
                     box.pack_start (apply);
 
-                    ((Gtk.Box)add_popover.get_content_area ()).add (box);
-                    add_popover.move_to_widget(add_button);
+                    add_popover.add (box);
                     add_popover.show_all ();
-                    add_popover.present ();
-                    add_popover.run ();
-                    add_popover.destroy ();
             });
 
             remove_button.clicked.connect (() => list_remove());
