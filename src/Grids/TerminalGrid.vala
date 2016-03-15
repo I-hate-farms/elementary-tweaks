@@ -211,9 +211,9 @@ namespace ElementaryTweaks {
                         _("Follow last tab:"),
                         _("If the user opens a new tab either take the current workdirectory of the previous tab or the default one."),
                         null,
-                        (() => { return TerminalSettings.get_default ().follow-last-tab; }), // get
+                        (() => { return TerminalSettings.get_default ().follow_last_tab; }), // get
                         ((val) => {
-                                TerminalSettings.get_default ().follow-last-tab = val;
+                                TerminalSettings.get_default ().follow_last_tab = val;
                             }), // set
                         (() => { TerminalSettings.get_default ().schema.reset ("follow-last-tab"); }) // reset
                     );
