@@ -1,3 +1,7 @@
+# NOTE: Repo Archived
+This repo is superseded by this version: https://github.com/elementary-tweaks/elementary-tweaks
+Please make sure to use the newer version and report bugs there.
+
 ## Easily customize elementary 
 elementary-tweaks is a **switchboard plug** that lets you customize easily elementary
 
