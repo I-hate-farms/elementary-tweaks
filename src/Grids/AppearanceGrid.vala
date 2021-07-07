@@ -89,6 +89,17 @@ namespace ElementaryTweaks {
             this.add (cursor_theme);
 
             this.add (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
+            
+            //Workspace switcher background
+            var workspace_background = new TweakWidget.with_file_button (
+                        _("Multitasking View Background"), // name
+                        _("Custom background for the multitasking view"), // tooltip
+                        _("This will take place after gala is restarted"), // warning
+                        (() => { return AppearanceSettings.get_default ().workspace_switcher_background; }), // get
+                        ((val) => { AppearanceSettings.get_default ().workspace_switcher_background = val; }), // set
+                        (() => { AppearanceSettings.get_default ().schema.reset ("workspace-switcher-background"); }) // reset
+                    );
+            this.add (workspace_background);
 
             // Custom layout
             custom_layout = new TweakWidget.with_entry (
